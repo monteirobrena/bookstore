@@ -41,7 +41,11 @@ class PublishingHousesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_publishing_house
-      @publishing_house = PublishingHouse.find(params[:id])
+      begin
+        @publishing_house = PublishingHouse.find(params[:id])
+      rescue => execption
+        render json: { error: execption }, status: :not_found
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
