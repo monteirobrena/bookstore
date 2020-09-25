@@ -73,6 +73,17 @@ RSpec.describe BooksController, type: :request do
       expect(response.body).to_not eql(no_result)
     end
 
+    it 'returns a 422 and error' do
+      Book.create(title: 'Alain de Botton', price: price, author: author, publisher: publisher)
+      book = Book.new
+      book.valid?
+
+      put "/books/#{id}", params: { book: { title: '', price: '', author_id: '', publisher_id: '' } }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to eql(book.errors.messages.to_json)
+    end
+
     it 'returns a 404 and error' do
       put "/books/#{id}", params: {}
 

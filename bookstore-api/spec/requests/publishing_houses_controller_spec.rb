@@ -70,6 +70,17 @@ RSpec.describe PublishingHousesController, type: :request do
       expect(response.body).to_not eql(no_result)
     end
 
+    it 'returns a 422 and error' do
+      PublishingHouse.create(name: 'Hogarth Press')
+      publishing_house = PublishingHouse.new
+      publishing_house.valid?
+
+      put "/publishing-houses/#{id}", params: { publishing_house: { name: '' } }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to eql(publishing_house.errors.messages.to_json)
+    end
+
     it 'returns a 404 and error' do
       put "/publishing-houses/#{id}", params: {}
 
