@@ -1,24 +1,31 @@
-# README
+# Bookstore API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
 
-Things you may want to cover:
+```ruby
+bundle
+```
 
-* Ruby version
+## Running Tests
 
-* System dependencies
+```ruby
+rails db:environment:set RAILS_ENV=test
 
-* Configuration
+rspec spec/
 
-* Database creation
+open coverage/index.html
+```
 
-* Database initialization
+## Database
 
-* How to run the test suite
+```ruby
+rails db:create
+rails db:migrate
+rails db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running / Development
 
-* Deployment instructions
-
-* ...
+```ruby
+rails s
+```
