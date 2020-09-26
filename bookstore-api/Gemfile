@@ -26,6 +26,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 gem 'active_model_serializers', '0.10.10'
+gem 'octokit', '~> 4.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'

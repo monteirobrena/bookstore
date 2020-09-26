@@ -24,6 +24,20 @@ rails db:migrate
 rails db:seed
 ```
 
+## Tasks
+
+Define token to access GitHub:
+
+```
+export GITHUB_TOKEN="YOUR_TOKEN"
+```
+
+Import authors to GitHub:
+
+```ruby
+rails authors:create
+```
+
 ## Running / Development
 
 ```ruby
