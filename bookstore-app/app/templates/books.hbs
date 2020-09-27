@@ -1,9 +1,14 @@
-<ul>
-  {{#each @model as |book|}}
-    {{book-cover book=book blurBackground=(route-action "blurBackground")}}
-  {{/each}}
-</ul>
-
-{{#if showAll}}
-  <button {{action 'showAll'}}>Show All</button>
-{{/if}}
+<div class="books">
+  <ul>
+    {{#each @model as |book|}}
+      {{book-cover book=book blurBackground=(route-action "blurBackground")}}
+    {{/each}}
+  </ul>
+</div>
+<div class="buttons">
+  {{#if showAll}}
+    <button {{action 'showAll'}}>
+      Show All
+    </button>
+  {{/if}}
+</div>
