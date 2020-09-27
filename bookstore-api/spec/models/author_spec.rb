@@ -8,8 +8,8 @@ RSpec.describe Author, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:books) }
-    it { should have_many(:published) }
+    it { should have_many(:books).dependent(:destroy) }
+    it { should have_many(:published).dependent(:destroy) }
   end
 
   describe '.discount' do
