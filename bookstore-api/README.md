@@ -10,7 +10,9 @@ bundle
 
 ```ruby
 rails db:environment:set RAILS_ENV=test
+Go to **Settings** on GitHub repo, click on **Webhooks**, then click on **Add Webhook**.
 
+In the **Payload URL** paste the
 rspec spec/
 
 open coverage/index.html
@@ -46,8 +48,59 @@ Start API:
 rails s
 ```
 
-Start tunel to localhost:
+## GitHub Webhooks
+
+Start tunel to localhost and copy the Forwarding URL to use as **Payload URL** on GitHub:
 
 ```
 ngrok http 3000
 ```
+
+### Authors
+
+Go to **Settings** on GitHub repo, click on **Webhooks**, then click on **Add Webhook**.
+
+In the **Payload URL** paste the **Forwarding URL** generate by `ngrok` and add the path:
+
+```ruby
+/authors/webhook
+```
+
+The full **Payload URL** will be something like that:
+
+http://09c08b902e59.ngrok.io/authors/webhook
+
+1. Choose `application/x-www-form-urlencoded` on **Content type** selection.
+
+2. Choose `Let me select individual events.` on **Which events would you like to trigger this webhook?**.
+
+3. Select `Issues` checkbox.
+
+4. Select `Active` checkbox.
+
+5. Click on **Add webhook**.
+
+
+### Books
+
+Go to **Settings** on GitHub repo, click on **Webhooks**, then click on **Add Webhook** again.
+
+In the **Payload URL** paste the **Forwarding URL** generate by `ngrok` and add the path:
+
+```ruby
+/books/webhook
+```
+
+The full **Payload URL** will be something like that:
+
+http://09c08b902e59.ngrok.io/books/webhook
+
+1. Choose `application/x-www-form-urlencoded` on **Content type** selection.
+
+2. Choose `Let me select individual events.` on **Which events would you like to trigger this webhook?**.
+
+3. Select `Issue comments` checkbox.
+
+4. Select `Active` checkbox.
+
+5. Click on **Add webhook**.
