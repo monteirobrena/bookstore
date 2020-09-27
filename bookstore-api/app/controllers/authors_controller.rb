@@ -1,5 +1,14 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: [:show, :update, :destroy]
+  before_action -> { set_author({ id: params[:id] }) }, only: [:show]
+
+  # POST /authors/webhook
+  def webhook
+    begin
+      send(payload["action"])
+    rescue NoMethodError
+      render json: { error: I18n.t('errors.action.not_found', action: payload["action"]) }, status: :not_found && return
+    end
+  end
 
   # GET /authors
   def index
@@ -13,43 +22,51 @@ class AuthorsController < ApplicationController
     render json: @author, include: ['books']
   end
 
-  # POST /authors
-  def create
-    @author = Author.new(author_params)
-
-    if @author.save
-      render json: @author, status: :created, location: @author
-    else
-      render json: @author.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /authors/1
-  def update
-    if @author.update(author_params)
-      render json: @author
-    else
-      render json: @author.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /authors/1
-  def destroy
-    @author.destroy
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_author
+    def current_name
       begin
-        @author = Author.find(params[:id])
-      rescue => execption
+        @current_name ||= payload["changes"]["title"]["from"]
+      rescue NoMethodError
+        @current_name ||= payload["issue"]["title"]
+      end
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_author(args)
+      begin
+        @author ||= Author.find_by!(args)
+      rescue ActiveRecord::RecordNotFound => execption
         render json: { error: execption }, status: :not_found
       end
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def author_params
-      params.require(:author).permit(:name)
+    def payload
+      @payload ||= JSON.parse(params[:payload])
+    end
+
+    def opened
+      @author = Author.new(name: payload["issue"]["title"], bio: payload["issue"]["body"])
+
+      if @author.save
+        render json: @author, status: :created, location: @author
+      else
+        render json: @author.errors, status: :unprocessable_entity
+      end
+    end
+
+    def edited
+      set_author({ name: current_name })
+
+      if @author.update(name: payload["issue"]["title"], bio: payload["issue"]["body"])
+        render json: @author, status: :ok, location: @author
+      else
+        render json: @author.errors, status: :unprocessable_entity
+      end
+    end
+
+    def deleted
+      set_author({ name: current_name })
+
+      @author.destroy
     end
 end
