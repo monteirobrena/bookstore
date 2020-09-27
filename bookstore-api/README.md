@@ -40,6 +40,14 @@ rails authors:create
 
 ## Running / Development
 
+Start API:
+
 ```ruby
 rails s
+```
+
+Start tunel to localhost:
+
+```
+ngrok http 3000
 ```
