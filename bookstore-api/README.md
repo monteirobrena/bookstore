@@ -10,9 +10,7 @@ bundle
 
 ```ruby
 rails db:environment:set RAILS_ENV=test
-Go to **Settings** on GitHub repo, click on **Webhooks**, then click on **Add Webhook**.
 
-In the **Payload URL** paste the
 rspec spec/
 
 open coverage/index.html
