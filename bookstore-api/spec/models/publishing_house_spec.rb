@@ -8,6 +8,6 @@ RSpec.describe PublishingHouse, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:published) }
+    it { should have_many(:published).dependent(:destroy) }
   end
 end

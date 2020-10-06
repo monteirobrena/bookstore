@@ -8,7 +8,7 @@ RSpec.describe AuthorSerializer, type: :serializer do
 
   let(:subject_json) { JSON.parse(subject.to_json) }
 
-  it { expect(subject_json["data"]["attributes"].keys).to contain_exactly("discount", "name") }
+  it { expect(subject_json["data"]["attributes"].keys).to contain_exactly("discount", "name", "bio") }
 
   it { expect(subject_json["data"]["relationships"].keys).to contain_exactly("books", "published") }
 end
