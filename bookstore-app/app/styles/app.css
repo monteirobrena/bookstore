@@ -1,71 +1,228 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: Courier, monospace;
+  margin: 0;
+  padding: 0;
   font-size: 1.2em;
-  margin-left: 2em;
+  background-color: #f1f1f1;
+  font-family: Courier, monospace;
+}
+
+nav {
+  top: 0;
+  width: 100%;
+  margin: 0px;
+  height: 70px;
+  position: fixed;
+  background-color: #fff;
+  border: 2px solid #f4f4f4;
+}
+
+footer {
+  bottom: 0;
+  color: #fff;
+  width: 100%;
+  margin: 0px;
+  position: fixed;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: #2f2e2e;
+}
+
+footer > span {
+  padding: 10px;
+  color: #f4f4f4;
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bookstore {
+  padding-bottom: 200px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.books {
+  display: flex;
+  margin: 100px auto 0px auto;
+}
+
+div.author {
+  margin: 100px 3em 0px 3em;
+}
+
+div.author > span.bio {
+  padding-right: 3em;
+}
+
+div.author > ul {
+  margin: 0;
 }
 
 ul {
-  margin: 0;
   padding: 0;
+  width: 95%;
+  margin: 0 auto;
   list-style-type: none;
 }
 
 ul div {
-  display: inline-block;
-  vertical-align: top;
-  height: 250px;
   width: 200px;
+  height: 250px;
+  margin-bottom: 2em;
   text-align: center;
-  padding: 0 1em 3em;
+  vertical-align: top;
+  padding: 0 1em 1.5em;
+  display: inline-block;
 }
 
 ul li {
-  padding: 1em;
-  border: 6px solid #AFAFAF;
-  background: #E9E9E9;
+  color: #000;
   height: 90%;
+  padding: 1em;
   cursor: pointer;
+  background-color: #fff;
+  border: 6px solid #afafaf;
+}
+
+ul li:hover {
+  color: #444;
+  transition: color 0.4s ease 0s;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 a.author {
-  text-decoration: underline;
   color: #111;
+  text-decoration: underline;
+}
+
+span.borded {
+  padding: 3px;
+  margin-right: 3px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #ff5700;
+}
+
+h2.title {
+  padding-left: 1em;
+}
+
+h2.title > a {
+  color: #ff5700;
+  margin: 1em;
+  display: block;
+  font-size: 22px;
+  font-weight: normal;
+  text-transform: lowercase;
+}
+
+h2.title > a:hover > span.borded {
+  color: #fff;
+  background-color: #ff5700;
+  border: 1px solid #ff5700;
+  transition: background-color 0.5s ease 0s;
+}
+
+button, a.button {
+  color: #fff;
+  margin: auto;
+  outline: none;
+  font-size: 18px;
+  padding: 15px 20px;
+  border-radius: 5px;
+  background-color: #ff5700;
+  border: 1px solid #ff5700;
+  text-transform: capitalize;
+  font-family: Courier, monospace;
+  transition: background-color 0.4s ease 0s;
+}
+
+button:hover, a.button:hover, h2.title > a:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover, a.button:hover {
+  color: #ff5700;
+  background-color: #fff;
+  border: 1px solid #ff5700;
 }
 
 .modal {
-  width: 20em;
-  height: 15em;
-  position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 11; /* 1px higher than the overlay layer */
+  width: 20em;
+  height: auto;
+  padding: 1em;
+  position: fixed;  
   margin-top: -7.5em;
   margin-left: -10em;
-  padding: 1em;
-  background-color: #f1c40f;
   border-radius: 5px;
   text-align: center;
-  z-index: 11; /* 1px higher than the overlay layer */
   opacity: 1 !important;
+  background-color: #fff;
+
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+
   -webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.28);
   -moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.28);
   box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.28);
+
   -webkit-transition: opacity 400ms ease-in;
   -moz-transition: opacity 400ms ease-in;
   transition: opacity 400ms ease-in;
 }
 
 .blur-background {
-  z-index: -999;
   opacity: 0.3;
+  z-index: -999;
   pointer-events: none;
+
   filter: blur(3px);
   -webkit-filter: blur(3px);
+}
+
+@media only screen and (max-width: 768px) {
+  .books > ul div {
+    width: 195px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .books {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .author {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .author > ul {
+    width: 80%;
+  }
+
+  .modal {
+    left: 25%;
+    width: 75%;
+    margin-left: 0;
+    transform: translateX(-20%);
+  }
 }

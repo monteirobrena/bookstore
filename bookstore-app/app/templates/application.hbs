@@ -1,7 +1,16 @@
-<h2 id="title">
-  {{link-to "Our Awesome Bookstore" 'books'}}
-</h2>
+<nav>
+  <h2 class="title">
+    <a href="/">
+      <span class="borded">Book</span>Store
+    </a>
+  </h2>
+</nav>
 
-<div class="{{if blur 'blur-background'}}">
+<div class="bookstore {{if blur 'blur-background'}}">
   {{outlet}}
 </div>
+
+<footer>
+  <span>@monteirobrena</span>
+  <span>Made with Rails, Ember and fun.</span>
+</footer>

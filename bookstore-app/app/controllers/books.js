@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Controller.extend({
   queryParams: ['limit'],
-  limit: 5,
+  limit: 6,
 
   total: computed('model.meta', function() {
     return this.get('model.meta').total;
